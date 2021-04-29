@@ -1,6 +1,9 @@
 import React from 'react';
 
 import ImageGalleryItem from '../ImageGalleryItem';
+
+import PropTypes from 'prop-types';
+
 import styles from './ImageGallery.module.css';
 
 const ImageGallery = ({ images, toggleModal }) => {
@@ -17,10 +20,17 @@ const imageElements = images.map(image => (
         <ImageGalleryItem image={image} key={image.id} />
       ))
   return (
-    <ul className={styles.ImageGallery} onClick={checkEvent}>
+    <ul className={styles.imageGallery} onClick={checkEvent}>
       {imageElements}
     </ul>
   );
 };
  
+
+
+ImageGalleryItem.propTypes = {
+  images: PropTypes.array.isRequired,
+  toggleModal: PropTypes.func.isRequired
+};
+
 export default ImageGallery;

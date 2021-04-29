@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import Loader from 'react-loader-spinner';
+
 import {getPhotos} from './Services/apiService';
 import Searchbar from './Components/Searchbar';
 import ImageGallery from './Components/ImageGallery';
 import Notify from './Components/Notify';
 import Modal from './Components/Modal';
 import Button from './Components/Button';
+
 import {initialState} from "./Services/initialState"
 
 import styles from './App.module.css';
@@ -74,6 +76,7 @@ class App extends Component {
       this.setState({ showButton: false });
     }
   }
+
   showNotify = () => {
     const { totalHits } = this.state;
 
@@ -116,20 +119,16 @@ class App extends Component {
         {isLoading && (
           <Loader type="BallTriangle" color="#2a52be" height={120} width={120} />
         )}
-        {images.length > 0 && (
+        {images.length && (
           <ImageGallery images={images} toggleModal={this.toggleModal} />
         )}
         {emptyNotify && (
           <Notify message="Ничего не найдено." />
         )}
         {onModal && (
-          <Modal
-            src={targetImage.src}
-            alt={targetImage.alt}
-            toggleModal={this.toggleModal}
-          />
+          <Modal toggleModal={this.toggleModal}><img className={styles.img} src={targetImage.src} alt="" /></Modal>
         )}
-        {showButton && <Button onClick={this.onButtonMoreClick} />}
+        {showButton && <Button text="Load more" onClick={this.onButtonMoreClick} />}
       </div>
     );
   }

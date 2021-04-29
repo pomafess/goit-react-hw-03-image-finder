@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+
+import PropTypes from 'prop-types';
+
 import styles from './Modal.module.css';
 
 class Modal extends Component {
@@ -17,16 +20,22 @@ class Modal extends Component {
   };
 
   render() {
-    const { src, alt } = this.props;
+    
 
     return (
-      <div className={styles.Overlay} onClick={this.checkEvent}>
-        <div className={styles.Modal}>
-          <img className={styles.img} src={src} alt={alt} />
+      <div className={styles.overlay} onClick={this.checkEvent}>
+        <div className={styles.modal}>
+          {this.props.children}
         </div>
       </div>
     );
   }
 }
+
+
+
+Modal.propTypes = {
+  toggleModal: PropTypes.func.isRequired
+};
 
 export default Modal;
